@@ -4,15 +4,15 @@
 
     public class Document
     {
-        //// TODO does it relate to Title somehow?
-        public bool HasTitle { get; set; }
+        public Document()
+        {
+            this.Entries = new Dictionary<string, Entry>();
+        }
+
+        public bool? HasTitle { get; set; }
 
         public string Title { get; set; }
 
-        public Dictionary<string, Entry> Entries
-        {
-            get;
-            set;
-        }
+        public Dictionary<string, Entry> Entries { get; set; }
     }
 }

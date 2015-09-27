@@ -6,42 +6,11 @@
 
     using FluentAssertions;
 
-    using RestSharp;
-    using RestSharp.Deserializers;
-
     using Xunit;
 
-    public class DocumentDeserializationTests
+    public class CustomDocumentDeserializerTests
     {
-        private static string DateFormat = "ddd, dd MMM yyyy HH:mm:sszzz";
-
-        [Fact]
-        public void AlternativeStructureDeserialization()
-        {
-            var response = new RestResponse();
-            response.Content = Inputs.Alternative;
-            response.ContentType = "text/json";
-
-            var sut = CreateDeserializer();
-            var result = sut.Deserialize<Document>(response);
-
-            result.ShouldBeEquivalentTo(Expected);
-        }
-
-        [Fact(Skip = "Would require List<dynamic> for Entries to pass. ")]
-        public void OriginalStructureDeserialization()
-        {
-            var response = new RestResponse();
-            response.Content = Inputs.Original;
-            response.ContentType = "text/json";
-
-            var sut = CreateDeserializer();
-            var result = sut.Deserialize<Document>(response);
-
-            result.ShouldBeEquivalentTo(Expected);
-        }
-
-        private static Document Expected 
+        private static Document Expected
         {
             get
             {
@@ -59,7 +28,7 @@
                                    Path = new Uri("/Task.jpg", UriKind.Relative),
                                    ClientMtime = new DateTimeOffset(2014, 1, 14, 5, 53, 57, TimeSpan.Zero),
                                    Bytes = 207696
-                };
+                               };
                 return new Document()
                            {
                                Title = "GoodLuck",
@@ -74,22 +43,34 @@
             }
         }
 
-        private static JsonDeserializer CreateDeserializer()
+        [Fact]
+        public void Almost_empty_JSON_should_deserialize_as_such()
         {
-            var deserializer = new JsonDeserializer();
-            deserializer.Culture = CultureInfo.InvariantCulture;
-            deserializer.DateFormat = DateFormat;
-            return deserializer;
+            var sut = new CustomDocumentDeserializer();
+
+            var result = sut.Deserialize(Inputs.Empty);
+
+            result.HasTitle.Should().NotHaveValue();
+            result.Title.Should().BeNullOrEmpty();
+        }
+
+        [Fact]
+        public void Original_structure_indirect_deserialization()
+        {
+            var sut = new CustomDocumentDeserializer();
+
+            var result = sut.Deserialize(Inputs.Original);
+
+            result.ShouldBeEquivalentTo(Expected);
         }
 
         [Fact]
         public void DateFormatTest()
         {
-            var format = DateFormat;
+            var format = CustomDocumentDeserializer.DateFormat;
             var now = new DateTimeOffset(2015, 9, 24, 21, 16, 37, TimeSpan.FromHours(2));
             var actual = now.ToString(format, CultureInfo.InvariantCulture);
             Assert.Equal("Thu, 24 Sep 2015 21:16:37+02:00", actual);
         }
     }
 }
-

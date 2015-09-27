@@ -67,7 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentDeserializationTests.cs" />
+    <Compile Include="CustomDocumentDeserializerTests.cs" />
+    <Compile Include="CustomDocumentDeserializer.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Inputs.Designer.cs">
@@ -82,6 +83,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\empty.json" />
     <None Include="Resources\original.json" />
   </ItemGroup>
   <ItemGroup>
