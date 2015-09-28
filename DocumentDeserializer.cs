@@ -1,5 +1,6 @@
 ﻿namespace Deserializer
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
 
@@ -19,6 +20,8 @@
 
         public Document Deserialize(string content)
         {
+            if (content == null) { throw new ArgumentNullException(nameof(content)); }
+
             var response = this.WrapWithResponse(content);
             var deserializer = CreateDeserializer();
             var interim = deserializer.Deserialize<InterimDocumentRepresentation>(response);
@@ -27,7 +30,9 @@
 
         private Document MapToFullyTypedDocument(InterimDocumentRepresentation interim, JsonDeserializer deserializer)
         {
-            //// TODO add guarding checks to make sure assumptions made will hold. 
+            if (interim == null) { throw new ArgumentNullException(nameof(interim)); }
+            if (deserializer == null) { throw new ArgumentNullException(nameof(deserializer)); }
+
             var result = new Document();
             result.HasTitle = interim.HasTitle;
             result.Title = interim.Title;
