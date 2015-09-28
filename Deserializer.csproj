@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomDocumentDeserializerTests.cs" />
+    <Compile Include="DocumentDeserializerTests.cs" />
     <Compile Include="DocumentDeserializer.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Inputs.Designer.cs">

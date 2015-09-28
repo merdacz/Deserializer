@@ -16,7 +16,7 @@
     using Xunit;
     using Xunit.Abstractions;
 
-    public class CustomDocumentDeserializerTests
+    public class DocumentDeserializerTests
     {
         private static Document Expected
         {

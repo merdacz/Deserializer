@@ -12,6 +12,7 @@
     /// </summary>
     /// <remarks>Uses RestSharp underneath. Two stage approach due to RestSharp deserializer
     /// limitations around highly polymorphic JSON array instances. </remarks>
+    /// <see cref="http://stackoverflow.com/a/29217883"/>
     public class DocumentDeserializer
     {
         public static string DateFormat = "ddd, dd MMM yyyy HH:mm:sszzz";
