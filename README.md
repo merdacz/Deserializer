@@ -1,6 +1,6 @@
 # Deserializer
 
-[![Build status](https://ci.appveyor.com/api/projects/status/n0xcqvxt4ci6h7vd?svg=true)](https://ci.appveyor.com/project/merdacz/deserializer
+[![Build status](https://ci.appveyor.com/api/projects/status/n0xcqvxt4ci6h7vd?svg=true)](https://ci.appveyor.com/project/merdacz/deserializer)
 
 ## Summary
 Deserializes JS objects of given shape using RestSharp JsonDeserializer underneath. Given library limitations as described on [stack overflow](http://stackoverflow.com/a/29217883) the process happens two-phase. First is deserialization into interim representation using `JsonArray` for the outer `Entries` list. Thereafter individual entries from that array are being individually re-processed, which includes serialization and final deserialization. The logic is wrapped into `DocumentDeserializer` class and its usage is demonstrated in unit test `DocumentDeserializerTests#Original_structure_indirect_deserialization`.
