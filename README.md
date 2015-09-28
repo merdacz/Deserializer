@@ -6,7 +6,7 @@
 Deserializes JS objects of [given shape](#original-format) using RestSharp JsonDeserializer underneath. Given library limitations as described on [stack overflow](http://stackoverflow.com/a/29217883) the process happens two-phase. First is deserialization into interim representation using `JsonArray` for the outer `Entries` list. Thereafter individual entries from that array are being individually re-processed, which includes serialization and final deserialization. The logic is wrapped into `DocumentDeserializer` class and its usage is demonstrated in unit test `DocumentDeserializerTests#Original_structure_indirect_deserialization`.
 
 ## Load tests
-Since above mentioned re-processing happens to achieve fully-typed result class it obviously has performance impact. `LoadTests` 'unit-tests' serve the purpose of meassuring that against two variables - number of entries and number of runs. `OriginalLoadTest` uses the two-phase parsing as described above and `AlternativeLoadTest` depends strictly on `JsonDeserializer` by using a bit modified input JSON structure. The results are as follows (sorted by ascending entries multiplied loops):
+Since above mentioned re-processing happens to achieve fully-typed result class it obviously has performance impact. `LoadTests` 'unit-tests' serve the purpose of meassuring that against two variables - number of entries and number of loops. `OriginalLoadTest` uses the two-phase parsing as described above and `AlternativeLoadTest` depends strictly on `JsonDeserializer` by using a bit modified input JSON structure. The results are as follows (sorted by ascending entries multiplied loops):
 
 | Version       | # of entries  | # of loops  | Total time [ms]
 | ------------- |:-------------:|:-----------:| ---------------
@@ -25,7 +25,7 @@ Since above mentioned re-processing happens to achieve fully-typed result class 
 
 Most of the cases alternative is superior, however for 10/500 case it is the opposite. Since the result persisted as such on subsequent [1.0.7](https://ci.appveyor.com/project/merdacz/deserializer/build/1.0.7)
 and [1.0.8](https://ci.appveyor.com/project/merdacz/deserializer/build/1.0.8) runs the guess is that GC collection may be influencing
-the result. This requires further investigation.
+the result. This requires [further investigation](https://github.com/merdacz/Deserializer/issues/1).
 
 ### Original format
 ```json
