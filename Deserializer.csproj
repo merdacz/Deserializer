@@ -68,14 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomDocumentDeserializerTests.cs" />
-    <Compile Include="CustomDocumentDeserializer.cs" />
+    <Compile Include="DocumentDeserializer.cs" />
     <Compile Include="Document.cs" />
-    <Compile Include="Entry.cs" />
     <Compile Include="Inputs.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Inputs.resx</DependentUpon>
     </Compile>
+    <Compile Include="LoadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

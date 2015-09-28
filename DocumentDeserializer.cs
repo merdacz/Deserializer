@@ -12,7 +12,7 @@
     /// </summary>
     /// <remarks>Uses RestSharp underneath. Two stage approach due to RestSharp deserializer
     /// limitations around highly polymorphic JSON array instances. </remarks>
-    public class CustomDocumentDeserializer
+    public class DocumentDeserializer
     {
         public static string DateFormat = "ddd, dd MMM yyyy HH:mm:sszzz";
 
@@ -34,7 +34,7 @@
             {
                 var entrySource = this.SerializeRaw(entry[1]);
                 var entryWrapped = this.WrapWithResponse(entrySource);
-                var typedEntry = deserializer.Deserialize<Entry>(entryWrapped);
+                var typedEntry = deserializer.Deserialize<Document.Entry>(entryWrapped);
                 result.Entries.Add(entry[0].ToString(), typedEntry);
             }
 

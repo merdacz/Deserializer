@@ -62,6 +62,32 @@ namespace Deserializer {
         
         /// <summary>
         ///   Looks up a localized string similar to {
+        ///  &quot;has_title&quot;: true,
+        ///  &quot;title&quot;: &quot;GoodLuck&quot;,
+        ///  &quot;entries&quot;: {
+        ///    &quot;/gettingstarted.pdf&quot;: {
+        ///      &quot;thumb_exists&quot;: false,
+        ///      &quot;path&quot;: &quot;/GettingStarted.pdf&quot;,
+        ///      &quot;client_mtime&quot;: &quot;Wed, 08 Jan 2014 18:00:54+0000&quot;,
+        ///      &quot;bytes&quot;: 249159
+        ///    },
+        ///    &quot;/task.jpg&quot;: {
+        ///      &quot;thumb_exists&quot;: true,
+        ///      &quot;path&quot;: &quot;/Task.jpg&quot;,
+        ///      &quot;client_mtime&quot;: &quot;Tue, 14 Jan 2014 05:53:57+0000&quot;,
+        ///      &quot;bytes&quot;: 207696
+        ///    }
+        ///  }
+        ///}.
+        /// </summary>
+        internal static string Alternative {
+            get {
+                return ResourceManager.GetString("Alternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
         ///  &quot;entries&quot;: [
         ///    [
         ///      &quot;/gettingstarted.pdf&quot;,
