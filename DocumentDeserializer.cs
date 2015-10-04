@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Globalization;
 
+    using AutoMapper;
+
     using RestSharp;
     using RestSharp.Deserializers;
     using RestSharp.Serializers;
@@ -18,6 +20,12 @@
     {
         public static string DateFormat = "ddd, dd MMM yyyy HH:mm:sszzz";
 
+        static DocumentDeserializer()
+        {
+            Mapper.CreateMap<InterimDocumentRepresentation, Document>()
+                .ForMember(x => x.Entries, options => options.Ignore());
+
+        }
         public Document Deserialize(string content)
         {
             if (content == null) { throw new ArgumentNullException(nameof(content)); }
@@ -33,9 +41,7 @@
             if (interim == null) { throw new ArgumentNullException(nameof(interim)); }
             if (deserializer == null) { throw new ArgumentNullException(nameof(deserializer)); }
 
-            var result = new Document();
-            result.HasTitle = interim.HasTitle;
-            result.Title = interim.Title;
+            var result = Mapper.Map<Document>(interim); 
             foreach (var entry in interim.Entries)
             {
                 var entrySource = this.SerializeRaw(entry[1]);
